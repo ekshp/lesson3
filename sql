@@ -89,10 +89,12 @@ GROUP BY department_id;
 
 # Посчитать количество работников в каждом регионе
 
-SELECT department_id, COUNT(employees.id) AS count
+SELECT regions.name, COUNT(employees.id) AS count
 FROM employees
 LEFT JOIN departments ON employees.department_id = departments.id
-GROUP BY employees.department_id;
+LEFT JOIN locations ON departments.location_id = locations.id
+LEFT JOIN regions ON locations.region_id = regions.id
+GROUP BY regions.name;
 
 # Показать сотрудников у которых фамилия длиннее 10 символов
 
